@@ -5,6 +5,8 @@ services:
 
   listener:
     image: simonwaterhouse/listener
+    environment:
+      - LISTEN_PORT=8081
     ports:
       - "8081:8081"
 

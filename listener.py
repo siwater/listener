@@ -16,11 +16,6 @@ def listen():
          print(f'Listener iteration #{i}')
          sleep(5)
 
-listen_port = os.environ.get('BACKEND_PORT')
-if listen_port == None:
-    sys.exit('LISTEN_PORT undefined')
-
-
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
@@ -32,6 +27,9 @@ def message():
     return jsonify({"message": "Listener awaiting your command"})
 
 if __name__ == "__main__":
+    listen_port = os.environ.get('LISTEN_PORT')
+    if listen_port == None:
+        sys.exit('LISTEN_PORT undefined')
     listener = threading.Thread(target=listen)
     listener.start() 
     app.run(host='0.0.0.0', port=listen_port)
